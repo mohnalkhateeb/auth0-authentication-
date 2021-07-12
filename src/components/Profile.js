@@ -11,6 +11,7 @@ class Profile extends Component {
                     <>
                         <div>Hello {user.name}</div>
                         <div>Hello {user.email}</div>
+                        <img alt='' src = {user.img}/>
                     </>
                 }
             </>
