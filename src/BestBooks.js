@@ -8,6 +8,7 @@ import { Card, Image, Button } from 'react-bootstrap/';
 import Jumbotron from 'react-bootstrap/Jumbotron';
 import AddBook from './components/AddBook.js'
 import './BestBooks.css';
+import Delete from './components/Delete.js';
 
 class MyFavoriteBooks extends React.Component {
   constructor(props) {
@@ -72,6 +73,27 @@ class MyFavoriteBooks extends React.Component {
     })
 
   }
+  deleteBook = async(index) =>{
+    console.log(index);
+    let paramsObj = {
+      e_mail:this.state.e_mail
+    }
+    console.log(paramsObj)
+    let delbookData = await axios.delete(`${this.state.server}/deletebook/${index}`,{params:paramsObj})
+    // index: req.params >> ownerName:req.query
+    console.log(delbookData)
+    // let catsData = await axios.delete(`${this.state.server}/deleteCat`,{params:paramsObj})
+    // // index: req.query >> ownerName:req.query
+
+    // let catsData = await axios.delete(`${this.state.server}/deleteCat?ownerName=${this.state.ownerName}&index=${index}`)
+    // // index: req.query >> ownerName:req.query
+
+    this.setState({
+      bookData:delbookData.data
+    })
+
+
+  }
 
 
 
@@ -102,7 +124,7 @@ class MyFavoriteBooks extends React.Component {
                     <Card.Text>
                       status: {item.status}
                     </Card.Text>
-
+                  <Delete deleteBook={this.deleteBook} idx={index}/>
                   </Card.Body>
                 </Card>
               )

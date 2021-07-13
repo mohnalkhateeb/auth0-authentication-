@@ -5,7 +5,7 @@ import Button from 'react-bootstrap/Button'
 // import  Card  from 'react-bootstrap/Card';
 // import { Modal, Button } from 'react-bootstrap'
 
-class SelectedBeast extends React.Component {
+class AddBook extends React.Component {
     render(){
   
         
@@ -32,4 +32,4 @@ class SelectedBeast extends React.Component {
       }
 }
 
-export default SelectedBeast;
+export default AddBook;
