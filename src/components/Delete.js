@@ -1,12 +1,13 @@
+import { Button } from 'react-bootstrap'
 import React, { Component } from 'react'
-
+import 'bootstrap/dist/css/bootstrap.min.css';
 export class Delete extends Component {
     
     render() {
         return (
             <>
                 
-              <button onClick={()=>this.props.deleteBook(this.props.idx)}>Delete</button>
+              <Button onClick={()=>this.props.deleteBook(this.props.idx)} variant="primary">Delete</Button>
             
             </>
         );
