@@ -9,6 +9,7 @@ import Jumbotron from 'react-bootstrap/Jumbotron';
 import AddBook from './components/AddBook.js'
 import './BestBooks.css';
 import Delete from './components/Delete.js';
+import Update from './components/Update.js';
 
 class MyFavoriteBooks extends React.Component {
   constructor(props) {
@@ -18,10 +19,15 @@ class MyFavoriteBooks extends React.Component {
       showBook: false,
       e_mail: '',
       displayModal: false,
-      server : process.env.REACT_APP_SERVER
+      server : process.env.REACT_APP_SERVER,
+      index: 0,
+      upData:[],
+      disUpdateModal: false,
+
     }
   }
   hideModal = () => { this.setState({ displayModal: false }); }
+  hideUpdateModal = () => { this.setState({ disUpdateModal: false }); }
   componentDidMount = async () => {
     const { user } = this.props.auth0;
     console.log(user);
@@ -44,6 +50,16 @@ class MyFavoriteBooks extends React.Component {
     // key.preventDefault()
     this.setState({ displayModal: true })
 
+  }
+  showUpdateModel = (index) => {
+    // key.preventDefault()
+    console.log(this.state.bookData)
+    console.log(index)
+    this.setState({ disUpdateModal: true ,
+    index : index,
+    upData : this.state.bookData[index]
+  })
+  console.log(index)
   }
   addBook = async (event) => {
     event.preventDefault();
@@ -94,7 +110,9 @@ class MyFavoriteBooks extends React.Component {
 
 
   }
+  updateBook = async(index) =>{}
 
+  
 
 
   render() {
@@ -125,11 +143,14 @@ class MyFavoriteBooks extends React.Component {
                       status: {item.status}
                     </Card.Text>
                   <Delete deleteBook={this.deleteBook} idx={index}/>
+                  <Button onClick={()=>this.showUpdateModel(index)} variant="primary" >Update</Button>
                   </Card.Body>
                 </Card>
               )
             })
+
           }
+          <Update  updateBook={this.updateBook} disUpdateModal={this.state.disUpdateModal} hideUpdateModal={this.hideUpdateModal} upData ={this.state.upData}/>
         </div>
       </Jumbotron>
     )
