@@ -110,7 +110,24 @@ class MyFavoriteBooks extends React.Component {
 
 
   }
-  updateBook = async(index) =>{}
+  updateBook = async(event) =>{
+    event.preventDefault();
+    console.log(event)
+    let bookFormData = {
+      bookName : event.target.bookName.value,
+      bookImg : event.target.bookImg.value,
+      bookDescription : event.target.bookDescription.value,
+      bookStatus : event.target.bookStatus.value,
+      e_mail : this.state.e_mail
+    }
+    console.log(this.state.index)
+    let upBookData = await axios.put(`${this.state.server}/updatebook/${this.state.index}`, bookFormData)
+
+    this.setState({
+      bookData:upBookData.data,
+      disUpdateModal: false
+    })
+  }
 
   
 
@@ -144,13 +161,15 @@ class MyFavoriteBooks extends React.Component {
                     </Card.Text>
                   <Delete deleteBook={this.deleteBook} idx={index}/>
                   <Button onClick={()=>this.showUpdateModel(index)} variant="primary" >Update</Button>
+                  
                   </Card.Body>
                 </Card>
               )
             })
 
           }
-          <Update  updateBook={this.updateBook} disUpdateModal={this.state.disUpdateModal} hideUpdateModal={this.hideUpdateModal} upData ={this.state.upData}/>
+          <Update  updateBook={this.updateBook} disUpdateModal={this.state.disUpdateModal} idx= {this.state.index} hideUpdateModal={this.hideUpdateModal} upData ={this.state.upData}/>
+          
         </div>
       </Jumbotron>
     )

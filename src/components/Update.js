@@ -17,7 +17,7 @@ class Update extends React.Component {
               {/* <h2>{this.props.title}</h2> */}
             </Modal.Header>
             <Modal.Body>
-            <form onSubmit={this.props.updateBook(this.props.index)}>
+            <form onSubmit={this.props.updateBook}>
                 <input  type="text" name='bookName' defaultValue ={this.props.upData.name}/><br/><br/>
                 <input  type="text" name='bookImg' defaultValue= {this.props.upData.img}/><br/><br/>
                 <input  type="text" name='bookDescription'  defaultValue = {this.props.upData.description }/><br/><br/>
